@@ -295,13 +295,13 @@ typedef void (*evm_call_fn)(struct evm_result* result,
                             struct evm_context* context,
                             const struct evm_message* msg);
 
-/// The Host interface.
+/// The context interface.
 ///
 /// The set of all callback functions expected by EVM instances. This is C
-/// realisation of OOP interface (only virtual methods, no data).
+/// realisation of vtable for OOP interface (only virtual methods, no data).
 /// Host implementations SHOULD create constant singletons of this (similarly
 /// to vtables) to lower the maintenance and memory management cost.
-struct evm_host {
+struct evm_context_fn_table {
     evm_account_exists_fn account_exists;
     evm_get_storage_fn get_storage;
     evm_set_storage_fn set_storage;
@@ -325,8 +325,8 @@ struct evm_host {
 /// Optionally, The Host MAY include in the context additional data.
 struct evm_context {
 
-    /// Function table defining the context interface.
-    const struct evm_host* fn_table;
+    /// Function table defining the context interface (vtable).
+    const struct evm_context_fn_table* fn_table;
 };
 
 

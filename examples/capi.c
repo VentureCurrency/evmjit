@@ -112,7 +112,7 @@ static void evm_log(struct evm_context* context, const struct evm_uint160be* add
     printf("EVM-C: LOG%d\n", (int)topics_count);
 }
 
-static const struct evm_host example_host = {
+static const struct evm_context_fn_table example_host = {
     account_exists,
     get_storage,
     set_storage,
